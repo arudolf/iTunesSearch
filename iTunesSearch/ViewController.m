@@ -53,12 +53,22 @@ NSMutableArray* resultArray;
         [table reloadData];
         [search resignFirstResponder];
         
+        if (resultArray.count == 0) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"INFO"
+                                                                message:@"There is no results!"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"ERROR"
                                                             message:[error localizedDescription]
                                                            delegate:nil
-                                                  cancelButtonTitle:@"Ok"
+                                                  cancelButtonTitle:@"OK"
                                                   otherButtonTitles:nil];
         [alertView show];
     }];
@@ -72,7 +82,6 @@ NSMutableArray* resultArray;
 {
     return 1;
 }
-
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
@@ -91,7 +100,6 @@ NSMutableArray* resultArray;
     }
     
     NSDictionary* itemResult = (NSDictionary*)[resultArray objectAtIndex:indexPath.row];
-    
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", [itemResult objectForKey:@"artistName"], [itemResult objectForKey:@"trackName"]];
     cell.detailTextLabel.text = [itemResult objectForKey:@"kind"];
