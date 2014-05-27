@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B0FAD74B1934ED4400A758EA"
-               BuildableName = "iTunesSearch.app"
+               BuildableName = "iTunes Search.app"
                BlueprintName = "iTunesSearch"
                ReferencedContainer = "container:iTunesSearch.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0FAD74B1934ED4400A758EA"
-            BuildableName = "iTunesSearch.app"
+            BuildableName = "iTunes Search.app"
             BlueprintName = "iTunesSearch"
             ReferencedContainer = "container:iTunesSearch.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0FAD74B1934ED4400A758EA"
-            BuildableName = "iTunesSearch.app"
+            BuildableName = "iTunes Search.app"
             BlueprintName = "iTunesSearch"
             ReferencedContainer = "container:iTunesSearch.xcodeproj">
          </BuildableReference>
@@ -80,7 +80,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B0FAD74B1934ED4400A758EA"
-            BuildableName = "iTunesSearch.app"
+            BuildableName = "iTunes Search.app"
             BlueprintName = "iTunesSearch"
             ReferencedContainer = "container:iTunesSearch.xcodeproj">
          </BuildableReference>

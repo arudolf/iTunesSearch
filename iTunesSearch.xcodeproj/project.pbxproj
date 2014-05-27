@@ -435,6 +435,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesSearch/iTunesSearch-Prefix.pch";
 				INFOPLIST_FILE = "iTunesSearch/iTunesSearch-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = "iTunes Search";
 				WRAPPER_EXTENSION = app;
 			};
@@ -449,6 +460,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "iTunesSearch/iTunesSearch-Prefix.pch";
 				INFOPLIST_FILE = "iTunesSearch/iTunesSearch-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					Security,
+					"-framework",
+					SystemConfiguration,
+				);
 				PRODUCT_NAME = "iTunes Search";
 				WRAPPER_EXTENSION = app;
 			};

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AFNetworking.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ViewController ()
 
@@ -48,9 +49,8 @@ NSMutableArray* resultArray;
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         resultArray = [responseObject objectForKey:@"results"];
-        NSLog(@"JSON Retrieved");
-        
         [table reloadData];
+        [table scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
         [search resignFirstResponder];
         
         if (resultArray.count == 0) {
@@ -103,6 +103,9 @@ NSMutableArray* resultArray;
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", [itemResult objectForKey:@"artistName"], [itemResult objectForKey:@"trackName"]];
     cell.detailTextLabel.text = [itemResult objectForKey:@"kind"];
+    
+    [cell.imageView setImageWithURL:[NSURL URLWithString:[itemResult objectForKey:@"artworkUrl100"]]];
+    
     return cell;
 }
 
