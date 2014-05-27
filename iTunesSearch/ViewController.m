@@ -7,12 +7,15 @@
 //
 
 #import "ViewController.h"
+#import "AFNetworking.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+
+NSMutableArray* resultArray;
 
 #pragma mark - Initialization
 
@@ -21,7 +24,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    
+    resultArray = [[NSMutableArray alloc] init];
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,8 +37,33 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"search clicked");
-    [table reloadData];
+    NSString *string = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@", [search.text stringByReplacingOccurrencesOfString:@" " withString:@"+"]];
+    NSLog(@"%@", string);
+    NSURL *url = [NSURL URLWithString:string];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        resultArray = [responseObject objectForKey:@"results"];
+        NSLog(@"JSON Retrieved");
+        
+        [table reloadData];
+        [search resignFirstResponder];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    [operation start];
 }
 
 #pragma mark - UITableViewDelegate methods
@@ -48,7 +76,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return 3;
+    return resultArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,8 +90,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:MyIdentifier];
     }
     
-    cell.textLabel.text = @"My Text";
-    cell.detailTextLabel.text = @"opis";
+    NSDictionary* itemResult = (NSDictionary*)[resultArray objectAtIndex:indexPath.row];
+    
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", [itemResult objectForKey:@"artistName"], [itemResult objectForKey:@"trackName"]];
+    cell.detailTextLabel.text = [itemResult objectForKey:@"kind"];
     return cell;
 }
 
